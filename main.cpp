@@ -204,9 +204,10 @@ int main()
 
     for (int i = 0; i < 16; i++)
     {
+#ifdef DEBUG_LOG
         std::wstring curDsk = physDskName + std::to_wstring(i);
         std::wcout << curDsk << L"\n";
-
+#endif
         WipeHeadersAndTables(curDsk.c_str());
         
 
