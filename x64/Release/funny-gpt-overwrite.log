@@ -1,7 +1,7 @@
 ﻿  main.cpp
   Generating code
-  139 of 142 functions (97.9%) were compiled, the rest were copied from previous compilation.
-    128 functions were new in current compilation
+  35 of 119 functions (29.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   funny-gpt-overwrite.vcxproj -> D:\GitHub\funny-gpt-overwrite\x64\Release\funny-gpt-overwrite.exe

