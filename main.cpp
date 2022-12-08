@@ -104,7 +104,16 @@ void Write(uint32 size, uint64 offset, void* buf)
     OVERLAPPED ol = {0};
     SetOverlapped(&ol, offset);
     BOOL res = WriteFile(driveHandle, buf, size, NULL, &ol);
-    //std::cout << "wrote " << size << " bytes to " << offset << std::endl;
+    std::cout << "trying to write " << size << " bytes at " << offset << std::endl;
+#ifdef DEBUG_LOG
+    if (res == 0)
+    {
+        std::cout << "Operation Failed. Error code: " << GetLastError() << std::endl;
+        return;
+    }
+    std::cout << "Operation successful." << std::endl;
+    return;
+#endif
 }
 
 
@@ -117,8 +126,13 @@ void Read(uint32 size, uint64 offset, void* target_buf)
     BOOL res = ReadFile(driveHandle, target_buf, size, NULL, &ol);
 #ifdef DEBUG_LOG
     std::cout << "trying to read " << size << " bytes at " << offset << std::endl;
-    std::cout << "Readfile result: " << res << std::endl;
-    std::cout << GetLastError() << std::endl;
+    if (res == 0)
+    {
+        std::cout << "Operation Failed. Error code: " << GetLastError() << std::endl;
+        return;
+    }
+    std::cout << "Operation successful." << std::endl;
+    return;
 #endif
 }
 
@@ -140,7 +154,7 @@ bool WipeHeadersAndTables(const wchar_t* name)
     if (driveHandle == INVALID_HANDLE_VALUE)
     {
 #ifdef DEBUG_LOG
-        std::cout << "err: invalid handle" << std::endl;
+        std::cout << "error: invalid handle" << std::endl;
         std::wcout << name << std::endl;
 #endif
         return 0;
